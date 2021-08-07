@@ -9,10 +9,10 @@ export default class MoviesController {
 
         if (req.query.title) {
             filters.title = req.query.title
-        } else if (req.query.directors) {
-            filters.directors = req.query.directors
-        } else if (req.query.genres) {
-            filters.genres = req.query.genres
+        } else if (req.query.director) {
+            filters.director = req.query.director
+        } else if (req.query.genre) {
+            filters.genre = req.query.genre
         }
 
         const { moviesList, totalNumMovies } = await MovieDAO.getMovies({

@@ -22,10 +22,10 @@ export default class MovieDAO {
         if (filters) {
             if ("title" in filters) {
                 query = { $text: { $search: filters["title"] } }
-            } else if ("directors" in filters) {
-                query = { "directors": { $eq: filters["directors"] } }
-            } else if ("genres" in filters) {
-                query = { "genres": { $eq: filters["genres"] } }
+            } else if ("genre" in filters) {
+                query = { "genres": { $eq: filters["genre"] } }
+            } else if ("director" in filters) {
+                query = { "directors": { $eq: filters["director"] } }
             }
         }
 
