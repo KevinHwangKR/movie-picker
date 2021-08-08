@@ -5,12 +5,12 @@ import { Link } from "react-router-dom"
 const MoviesList = props => {
     const [movies, setMovies] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
-    const [searchGenre, setSearchGenre] = useState([]);
-    const [searchDirector, setSearchDirector] = useState([]);
+    const [searchGenre, setSearchGenre] = useState("");
+    const [searchDirector, setSearchDirector] = useState("");
+    const [genres, setGenres] = useState(["All Genres"]);
 
     useEffect(() => {
-        retrieveMovies();
-
+        retrieveGenres();
     }, []);
 
     const onChangeSearchTitle = e => {
@@ -29,29 +29,17 @@ const MoviesList = props => {
 
     };
 
-    const retrieveMovies = () => {
-        MovieDataService.getAll()
+    const retrieveGenres = () => {
+        MovieDataService.getGenres()
             .then(response => {
                 console.log(response.data);
-                setMovies(response.data.movies);
+                setGenres(["Search by genre"].concat(response.data));
 
             })
             .catch(e => {
                 console.log(e);
             });
     };
-
-    // const retrieveGenres = () => {
-    //     MovieDataService.getGenres()
-    //         .then(response => {
-    //             console.log(response.data);
-    //             setGenres(["All Genres"].concat(response.data));
-
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // };
 
     const find = (query, by) => {
         MovieDataService.find(query, by)
@@ -99,13 +87,16 @@ const MoviesList = props => {
                 </div>
 
                 <div className="input-group col-lg-4">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search by genre"
-                        value={searchGenre}
-                        onChange={onChangeSearchGenre}
-                    />
+
+                    <select onChange={onChangeSearchGenre}>
+                        {genres.map(genre => {
+                            return (
+                                <option value={genre}>{genre}</option>
+                            )
+                        })}
+                    </select>
+
+
                     <div className="input-group-append">
                         <button
                             className="btn btn-outline-secondary"
@@ -149,13 +140,16 @@ const MoviesList = props => {
                                     <p className="card-text">
                                         <strong>Director: </strong>{movie.directors} <br />
                                         <strong>Genre: </strong>{movie.genres}<br />
+                                        <strong>Imdb Rating: </strong>{movie.imdb.rating}/10<br />
+                                        <strong>Year: </strong>{movie.year}<br />
+                                        <strong>Runtime: </strong>{movie.runtime} minutes<br />
                                     </p>
-                                    {/* <div className="row"> */}
-                                        {/* <Link to={"/restaurants/" + restaurant._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
+                                        <div className="row">
+                                            <Link to={"/movies/" + movie._id} className="btn btn-primary col-lg-5 mx-1 mb-1">
                                             View Reviews
-                                        </Link> */}
-                                        {/* <a target="_blank" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1">View Map</a> */}
-                                    {/* </div> */}
+                                            </Link>
+                                        <a target="_blank" href={"https://www.google.com/search?q=" + movie.title} className="btn btn-primary col-lg-5 mx-1 mb-1" rel="noreferrer">View Movie Info</a>
+                                        </div>
                                 </div>
                             </div>
                         </div>

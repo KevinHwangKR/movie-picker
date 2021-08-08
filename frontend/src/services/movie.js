@@ -6,14 +6,10 @@ class MovieDataService {
     }
 
     get(id) {
-        return http.get(`/id=${id}`);
+        return http.get(`/id/${id}`);
     }
 
     find(query, by, page = 0) {
-        
-        console.log("BY: ", by)
-        console.log("QUERY: ", query)
-
         return http.get(`?${by}=${query}&page=${page}`);
     }
 
@@ -26,7 +22,7 @@ class MovieDataService {
     }
 
     deleteReview(id, userId) {
-        return http.delete(`/review?id=${id}`);
+        return http.delete(`/review?id=${id}`, {data:{user_id: userId}});
     }
 
     getGenres(id) {
