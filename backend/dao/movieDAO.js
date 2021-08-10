@@ -6,7 +6,7 @@ export default class MovieDAO {
     static async injectDB(conn) {
         if (!movies) {
             try {
-                movies = await conn.db(process.env.MOVIES_DB).collection("movies")
+                movies = await conn.db("movieDB").collection("movies")
             } catch (e) {
                 console.error(e)
             }        

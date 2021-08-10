@@ -8,14 +8,12 @@ dotenv.config()
 
 const MongoClient = mongodb.MongoClient
 
-const port = process.env.PORT || 8000
+const port = 5000 || 8000
 
-MongoClient.connect(
-    process.env.MOVIES_DB_URI,
-    {
+MongoClient.connect("mongodb://kevinhkr:password@localhost:27017", {
+        useUnifiedTopology: true,
         useNewUrlParser: true
-    }
-)
+    })
     .catch(err => {
         console.error(err.stack)
         process.exit(1)
