@@ -10,7 +10,7 @@ const MongoClient = mongodb.MongoClient
 
 const port = 5000 || 8000
 
-MongoClient.connect("mongodb://kevinhkr:password@localhost:27017", {
+MongoClient.connect("mongodb://kevinhkr:password@mongodb:27017", {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })
