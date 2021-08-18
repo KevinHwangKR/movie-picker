@@ -10,6 +10,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=kevinhkr
       - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongodb-data:/data/db
   mongo-express:
     container_name: mongo-express
     image: mongo-express
@@ -47,5 +49,8 @@ services:
       - movie-picker-network
     ports:
       - 3000:3000
+volumes:
+  mongodb-data:
+    driver: local
 networks:
   movie-picker-network:
