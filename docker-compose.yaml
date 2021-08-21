@@ -17,7 +17,6 @@ services:
     image: mongo-express
     networks:
       - movie-picker-network
-    restart: always
     ports:
       - 8081:8081
     environment:
@@ -31,9 +30,7 @@ services:
       - mongodb
   backend:
     container_name: backend
-    build:
-      context: ./backend
-      dockerfile: ./Dockerfile
+    build: backend
     image: movie-picker-backend
     networks:
       - movie-picker-network
@@ -41,9 +38,7 @@ services:
       - 5000:5000
   frontend:
     container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: ./Dockerfile
+    build: frontend
     image: movie-picker-frontend
     networks:
       - movie-picker-network
