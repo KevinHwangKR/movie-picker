@@ -30,7 +30,7 @@ services:
       - mongodb
   backend:
     container_name: backend
-    image: kevinhkr/movie-picker-backend
+    image: movie-picker-backend
     build: backend
     networks:
       - movie-picker-network
@@ -38,7 +38,7 @@ services:
       - 5000:5000
   frontend:
     container_name: frontend
-    image: kevinhkr/movie-picker-frontend
+    image: movie-picker-frontend
     build: frontend
     networks:
       - movie-picker-network
