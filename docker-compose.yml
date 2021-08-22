@@ -30,16 +30,16 @@ services:
       - mongodb
   backend:
     container_name: backend
+    image: kevinhkr/movie-picker-backend
     build: backend
-    image: movie-picker-backend
     networks:
       - movie-picker-network
     ports:
       - 5000:5000
   frontend:
     container_name: frontend
+    image: kevinhkr/movie-picker-frontend
     build: frontend
-    image: movie-picker-frontend
     networks:
       - movie-picker-network
     ports:
